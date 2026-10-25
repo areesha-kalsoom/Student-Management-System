@@ -1,0 +1,24 @@
+# Dependencies and build output
+node_modules/
+.next/
+out/
+build/
+coverage/
+*.tsbuildinfo
+.vercel/
+.turbo/
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+
+# Logs and operating system files
+*.log
+.DS_Store
+Thumbs.db
+
+# Local data / backups
+*.dump
+*.sql.gz
+*.sqlite
