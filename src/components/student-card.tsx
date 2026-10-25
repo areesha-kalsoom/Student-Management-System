@@ -1,0 +1,14 @@
+import Link from "next/link";
+import { CalendarDays, Edit3, Eye, Trash2 } from "lucide-react";
+import { formatDate, initials } from "@/lib/client/format";
+import type { CustomField, Student } from "@/lib/types";
+
+export function StudentMini({ student }: { student: Student }) {
+  return <Link className="recent-item" href={`/students/${student.id}`}><span className="avatar avatar-small">{initials(student.name)}</span><span className="recent-copy"><strong>{student.name}</strong><span>{student.className} · {student.rollNumber}</span></span><span className={`badge ${student.status === "inactive" ? "badge-inactive" : ""}`}>{student.status}</span></Link>;
+}
+
+export function StudentCard({ student, onDelete, fields = [] }: { student: Student; onDelete: (student: Student) => void; fields?: CustomField[] }) {
+  const visibleFields = fields.filter((field) => field.showOnCard && student.customValues[field.id] !== undefined && student.customValues[field.id] !== "").slice(0, 2);
+  const cardValue = (value: unknown) => Array.isArray(value) ? value.join(", ") : typeof value === "boolean" ? (value ? "Yes" : "No") : typeof value === "object" ? "" : String(value ?? "");
+  return <article className="student-card"><div className="student-card-top"><Link href={`/students/${student.id}`} className="student-identity"><span className="avatar">{initials(student.name)}</span><span className="student-name-wrap"><h2 className="student-name">{student.name}</h2><span className="student-roll">Roll no. {student.rollNumber}</span></span></Link><span className={`badge ${student.status === "inactive" ? "badge-inactive" : ""}`}>{student.status}</span></div><div className="student-card-info"><div className="info-pair"><small>Class</small><strong>{student.className}</strong></div><div className="info-pair"><small>Department</small><strong>{student.department || "Not set"}</strong></div><div className="info-pair"><small>Enrolled</small><strong><CalendarDays size={12} style={{ verticalAlign: "-2px", marginRight: 4 }} />{formatDate(student.enrollmentDate)}</strong></div><div className="info-pair"><small>Student since</small><strong>{formatDate(student.createdAt)}</strong></div>{visibleFields.map((field) => <div className="info-pair" key={field.id}><small>{field.label}</small><strong>{cardValue(student.customValues[field.id])}</strong></div>)}</div><div className="student-card-actions"><Link className="button button-secondary" href={`/students/${student.id}`}><Eye size={14} />View profile</Link><span className="card-icon-actions"><Link className="icon-button" href={`/students/${student.id}/edit`} title={`Edit ${student.name}`} aria-label={`Edit ${student.name}`}><Edit3 size={15} /></Link><button className="icon-button" title={`Delete ${student.name}`} aria-label={`Delete ${student.name}`} onClick={() => onDelete(student)}><Trash2 size={15} /></button></span></div></article>;
+}

@@ -1,0 +1,6 @@
+import Link from "next/link";
+import { GraduationCap } from "lucide-react";
+
+export default function PrivacyPage() {
+  return <main className="terms-page"><article className="terms-card"><Link href="/" className="brand"><span className="brand-mark"><GraduationCap size={22} /></span><span className="brand-copy"><strong>Forma</strong><small>STUDENT RECORDS</small></span></Link><p className="eyebrow">PRIVACY INFORMATION</p><h1>Your workspace stays yours.</h1><p>This local application stores account details, hashed passwords, student profiles, and custom field definitions in the configured PostgreSQL database. Passwords are never stored as plain text. Session cookies are HTTP-only and are not stored in browser local storage.</p><p>Every student, dashboard, custom-field, import, and export query is scoped to the signed-in account on the server. The app does not provide sharing, collaboration, or email delivery. As this is a learning project, use fictional data only and do not enter real student or sensitive personal information.</p><p>Deleting your account removes its associated records through database ownership relationships. You can inspect the project source and database configuration before using it.</p><Link className="button button-primary" href="/register">Back to account creation</Link></article></main>;
+}

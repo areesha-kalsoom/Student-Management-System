@@ -1,0 +1,6 @@
+import Link from "next/link";
+import { GraduationCap } from "lucide-react";
+
+export default function TermsPage() {
+  return <main className="terms-page"><article className="terms-card"><Link href="/" className="brand"><span className="brand-mark"><GraduationCap size={22} /></span><span className="brand-copy"><strong>Forma</strong><small>STUDENT RECORDS</small></span></Link><p className="eyebrow">LOCAL PROJECT TERMS</p><h1>Terms of use</h1><p>Forma is an educational demonstration application intended for local development and learning. Use fictional information during testing; do not enter real student records or sensitive personal data.</p><p>You are responsible for keeping your local account credentials private and for configuring the database and environment variables securely. Accounts are separate workspaces: a signed-in user may manage only records associated with that account.</p><p>The application is provided as-is for local use. Email verification, password recovery by email, and public deployment are not configured. Deleting an account permanently deletes its associated student records, custom fields, and sessions from this local database.</p><Link className="button button-primary" href="/register">Back to account creation</Link></article></main>;
+}
